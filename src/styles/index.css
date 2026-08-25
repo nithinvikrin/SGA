@@ -495,8 +495,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .cards-5-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
   align-items: stretch;
 }
 
@@ -529,6 +529,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-align: center;
 }
 
 .firm-card:hover {
@@ -558,6 +559,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.05rem;
   color: var(--text-main);
   line-height: 1.25;
+  text-align: center;
 }
 
 .firm-specs {
@@ -569,6 +571,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-sm);
   margin: 12px 0;
   border: 1px solid var(--border-color);
+  text-align: center;
 }
 
 .spec-label {
@@ -577,6 +580,8 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.2px;
+  text-align: center;
+  display: block;
 }
 
 .spec-value {
@@ -586,6 +591,7 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 }
 
 .promo-badge-box {

@@ -267,12 +267,10 @@ export const giveawayService = {
       if (res.data && res.data.success) return res.data;
       if (res.data && res.data.message) throw new Error(res.data.message);
     } catch (e) {
-      if (e.response && e.response.data && e.response.data.message) {
-        if (!e.response.data.message.includes('Database connection error')) {
-          throw new Error(e.response.data.message);
-        }
+      if (e.response && e.response.status === 400 && e.response.data && e.response.data.message) {
+        throw new Error(e.response.data.message);
       }
-      if (e.message && !e.message.includes('Network Error') && !e.message.includes('Database connection error')) throw e;
+      console.log('Backend API offline or DB error, saving entry locally:', e.message);
     }
 
     const list = getLocal('opf_giveaways_v2', INITIAL_GIVEAWAYS);

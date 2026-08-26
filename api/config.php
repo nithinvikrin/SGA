@@ -10,13 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// Database Connection Credentials
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'sga_db');
+// Database Connection Credentials (Hostinger Production & Local Fallback)
+define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_USER', getenv('DB_USER') ?: 'u882069120_sga');
+define('DB_PASS', getenv('DB_PASS') ?: 'Q#v8WK;8D');
+define('DB_NAME', getenv('DB_NAME') ?: 'u882069120_sga');
+
 define('UPLOAD_DIR', __DIR__ . '/../uploads/');
 define('UPLOAD_URL', '/uploads/');
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>

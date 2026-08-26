@@ -41,14 +41,18 @@ export function Giveaways() {
     }
 
     setLoading(true);
-    const result = await giveawayService.entryGiveaway(formData);
-    setLoading(false);
-
-    if (result.success) {
-      setSuccessMessage(result.message || 'Successfully entered the giveaway!');
-      setFormData({ first_name: '', last_name: '', youtube_username: '', email: '', consent: false });
-    } else {
-      setErrorMessage(result.message || 'Failed to enter giveaway. Please try again.');
+    try {
+      const result = await giveawayService.submitGiveaway(formData);
+      if (result && result.success) {
+        setSuccessMessage(result.message || 'Successfully entered the giveaway!');
+        setFormData({ first_name: '', last_name: '', youtube_username: '', email: '', consent: false });
+      } else {
+        setErrorMessage((result && result.message) || 'Failed to enter giveaway. Please try again.');
+      }
+    } catch (err) {
+      setErrorMessage(err.message || 'Failed to submit entry. Please check your information and try again.');
+    } finally {
+      setLoading(false);
     }
   };
 

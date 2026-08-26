@@ -285,6 +285,10 @@ export const giveawayService = {
     return { success: true, message: 'Your entry has been submitted successfully.' };
   },
 
+  async entryGiveaway(entryData) {
+    return this.submitGiveaway(entryData);
+  },
+
   async getGiveaways(search = '') {
     try {
       const res = await apiClient.get('/giveaways/list.php', { params: { search } });

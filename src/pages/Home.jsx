@@ -65,7 +65,7 @@ export function Home() {
           <div style={{ marginBottom: '16px' }}>
             <span className="badge badge-edu" style={{ fontSize: '0.85rem', padding: '6px 16px', letterSpacing: '0.5px' }}>
               <BookOpen size={14} style={{ marginRight: '6px' }} />
-              SGA ACADEMY • UNEMPLOYED & JOB SEEKERS INITIATIVE
+              SG ACADEMY • UNEMPLOYED & JOB SEEKERS INITIATIVE
             </span>
           </div>
 

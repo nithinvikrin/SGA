@@ -1,3 +1,6 @@
+# Specify index.html as the primary DirectoryIndex
+DirectoryIndex index.html index.php
+
 # Apache configuration for Hostinger Shared Hosting (React SPA + PHP API)
 <IfModule mod_rewrite.c>
   RewriteEngine On

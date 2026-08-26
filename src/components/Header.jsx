@@ -55,9 +55,6 @@ export function Header() {
           <Link to="/giveaways" className="btn btn-navy btn-sm giveaway-header-btn">
             <Gift size={16} /> Giveaways
           </Link>
-          <Link to="/admin/login" className="btn btn-outline btn-sm admin-header-btn" title="Admin Login">
-            <UserCheck size={16} /> Admin
-          </Link>
 
           <button 
             className="mobile-toggle-btn"

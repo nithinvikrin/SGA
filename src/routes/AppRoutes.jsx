@@ -22,6 +22,7 @@ export function AppRoutes() {
       <Route path="/contact" element={<Contact />} />
 
       {/* Admin Auth */}
+      <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
       <Route path="/admin/login" element={<Login />} />
 
       {/* Admin Dashboard Protected Routes */}

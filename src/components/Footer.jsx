@@ -40,7 +40,6 @@ export function Footer() {
               <li><Link to="/prop-firms" className="text-muted" style={{ textDecoration: 'none' }}>Evaluation Matrix</Link></li>
               <li><Link to="/giveaways" className="text-muted" style={{ textDecoration: 'none' }}>Giveaways</Link></li>
               <li><Link to="/contact" className="text-muted" style={{ textDecoration: 'none' }}>Mentorship & Contact</Link></li>
-              <li><Link to="/admin/login" className="text-muted" style={{ textDecoration: 'none' }}>Admin Access</Link></li>
             </ul>
           </div>
 

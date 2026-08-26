@@ -10,6 +10,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+// Load .env if available
+$envPath = __DIR__ . '/../.env';
+if (!file_exists($envPath)) {
+    $envPath = __DIR__ . '/.env';
+}
+if (file_exists($envPath)) {
+    $envVars = @parse_ini_file($envPath);
+    if (is_array($envVars)) {
+        foreach ($envVars as $k => $v) {
+            putenv("$k=$v");
+            $_ENV[$k] = $v;
+        }
+    }
+}
+
 // Database Connection Credentials (Hostinger Production & Local Fallback)
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
 define('DB_USER', getenv('DB_USER') ?: 'u882069120_sga');

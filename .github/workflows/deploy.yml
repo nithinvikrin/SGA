@@ -40,5 +40,5 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
       
           local-dir: ./dist/
-          server-dir: ./domains/lightgray-lapwing-750208.hostingersite.com/public_html/
-          dangerous-clean-slate: true
+          server-dir: ./
+          dangerous-clean-slate: false

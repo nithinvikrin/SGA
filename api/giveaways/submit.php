@@ -27,25 +27,40 @@ if (!$consent) {
     exit();
 }
 
-$pdo = getDbConnection();
+try {
+    $pdo = getDbConnection();
 
-// Check duplicate entry by email
-$checkStmt = $pdo->prepare("SELECT id FROM giveaway_entries WHERE email = ?");
-$checkStmt->execute([$email]);
-if ($checkStmt->fetch()) {
+    // Check duplicate entry by email
+    $checkStmt = $pdo->prepare("SELECT id FROM giveaway_entries WHERE email = ?");
+    $checkStmt->execute([$email]);
+    if ($checkStmt->fetch()) {
+        echo json_encode([
+            "success" => true,
+            "message" => "Your entry is already recorded! Good luck!"
+        ]);
+        exit();
+    }
+
+    $stmt = $pdo->prepare("INSERT INTO giveaway_entries (first_name, last_name, youtube_username, email, consent) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$firstName, $lastName, $youtube, $email, $consent]);
+
     echo json_encode([
         "success" => true,
-        "message" => "Your entry is already recorded! Good luck!"
+        "message" => "Your entry has been submitted successfully.",
+        "id" => $pdo->lastInsertId()
     ]);
-    exit();
+} catch (PDOException $e) {
+    if ($e->getCode() == 23000 || strpos($e->getMessage(), 'Duplicate entry') !== false) {
+        echo json_encode([
+            "success" => true,
+            "message" => "Your entry is already recorded! Good luck!"
+        ]);
+    } else {
+        http_response_code(500);
+        echo json_encode([
+            "success" => false,
+            "message" => "Database operation error: " . $e->getMessage()
+        ]);
+    }
 }
-
-$stmt = $pdo->prepare("INSERT INTO giveaway_entries (first_name, last_name, youtube_username, email, consent) VALUES (?, ?, ?, ?, ?)");
-$stmt->execute([$firstName, $lastName, $youtube, $email, $consent]);
-
-echo json_encode([
-    "success" => true,
-    "message" => "Your entry has been submitted successfully.",
-    "id" => $pdo->lastInsertId()
-]);
 ?>

@@ -35,8 +35,15 @@ export function Giveaways() {
       return;
     }
 
+    const emailTrimmed = formData.email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailRegex.test(emailTrimmed)) {
+      setErrorMessage('Please enter a valid email address (e.g. name@example.com).');
+      return;
+    }
+
     if (!formData.consent) {
-      setErrorMessage('You must confirm subscription to SGA Telugu Youtube channel.');
+      setErrorMessage('You must confirm subscription to SGA Youtube channel.');
       return;
     }
 

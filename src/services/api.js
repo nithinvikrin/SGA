@@ -115,6 +115,7 @@ const INITIAL_GIVEAWAYS = [
 
 const apiClient = axios.create({
   baseURL: '/api',
+  timeout: 8000,
   headers: {
     'Content-Type': 'application/json'
   }
@@ -267,8 +268,11 @@ export const giveawayService = {
       if (res.data && res.data.success) return res.data;
       if (res.data && res.data.message) throw new Error(res.data.message);
     } catch (e) {
-      if (e.response && e.response.status === 400 && e.response.data && e.response.data.message) {
+      if (e.response && e.response.data && e.response.data.message) {
         throw new Error(e.response.data.message);
+      }
+      if (e.message && e.message !== 'Network Error' && !e.message.includes('timeout')) {
+        throw e;
       }
       console.log('Backend API offline or DB error, saving entry locally:', e.message);
     }

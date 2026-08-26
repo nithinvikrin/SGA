@@ -1,0 +1,22 @@
+# Apache configuration for Hostinger Shared Hosting (React SPA + PHP API)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Allow direct access to /api/ and /uploads/
+  RewriteCond %{REQUEST_URI} ^/(api|uploads)/ [NC]
+  RewriteRule ^ - [L]
+
+  # Do not rewrite existing files, directories, or symbolic links
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback all other SPA routes to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Security & Performance settings
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
